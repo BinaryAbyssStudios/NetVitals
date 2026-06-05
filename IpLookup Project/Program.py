@@ -42,15 +42,15 @@ def IpLookup(ip):
                 data = Response.json()
                 print(f"{T.LOG_SUCCESS} Converted to a Json Response") 
             try:
-                ip = data['ip']
-                hostname = data['hostname']
-                city = data['city']
-                region = data['region']
-                country = data['country']
-                location = data['loc']
-                org = data['org']
-                postal = data['postal']
-                timezone = data['timezone']
+                ip = data.get('ip', 'N/A')
+                hostname = data.get('hostname', 'N/A')
+                city = data.get('city', 'N/A')
+                region = data.get('region', 'N/A')
+                country = data.get('country', 'N/A')
+                location = data.get('loc', 'N/A')
+                org = data.get('org', 'N/A')
+                postal = data.get('postal', 'N/A')
+                timezone = data.get('timezone', 'N/A')
             except Exception as ex:
                 print(f"{T.LOG_WARN} {ex}")
 
@@ -108,10 +108,20 @@ while True:
         time.sleep(0.5)
         sys.exit()
     if cmd == "1":
-        Target = input("Enter ip > ")
+        try:
+            Target = input("Enter ip > ")
+        except KeyboardInterrupt:
+            print(f"{T.LOG_WARN} Closing Program.")
+            time.sleep(0.5)
+            sys.exit()
         IpLookup(Target)
     elif cmd == "2":
-        Target = input("Enter Url > ")
+        try:
+            Target = input("Enter Url > ")
+        except KeyboardInterrupt:
+            print(f"{T.LOG_WARN} Closing Program.")
+            time.sleep(0.5)
+            sys.exit()
         if not Target.startswith(('http://', 'https://')):
             Compressed_url = 'http://' + Target
             print(f"{T.LOG_INFO} Compressed Url: {Compressed_url}")
