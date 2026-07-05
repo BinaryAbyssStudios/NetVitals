@@ -7,33 +7,51 @@ import os
 import sys
 from urllib.parse import urlparse
 import webbrowser
+import platform
+os_name = platform.system()
 #Themes Module for coloers and customization
-import Themes as T
+try:
+    import Themes as T
+except FileNotFoundError:
+    print("[!] Could not found the Themes File.")
+    print("Please Import/Put the Theme file same directory as the program.")
+    
 
 
-#--- IPLOOKUP Program version 1.0---#
+#--- NetVitals Program version 1.0---#
 #- Open Source on Github.
+if os_name == "Windows":
+    os.system("title NetVitals v1.0")
+elif os_name == "Linux" or os_name == "Darwin":
+    os.system("""printf '\033]2;NetVitals v1.0\a'""")
+Banner =  f"""{T.COLOR_RED}
+███╗   ██╗███████╗████████╗██╗   ██╗██╗████████╗ █████╗ ██╗     ███████╗
+████╗  ██║██╔════╝╚══██╔══╝██║   ██║██║╚══██╔══╝██╔══██╗██║     ██╔════╝
+██╔██╗ ██║█████╗     ██║   ██║   ██║██║   ██║   ███████║██║     ███████╗
+██║╚██╗██║██╔══╝     ██║   ╚██╗ ██╔╝██║   ██║   ██╔══██║██║     ╚════██║
+██║ ╚████║███████╗   ██║    ╚████╔╝ ██║   ██║   ██║  ██║███████╗███████║
+╚═╝  ╚═══╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝"""
+Menu = f"""{T.COLOR_MAGENTA}
+                ╭──────────────────────────────────╮
+                |           NetVitals              |
+                ╰──────────────────────────────────╯
+    ╭────────────╯      
+    [1] Ip Lookup
+    [2] Url Lookup 
 
-os.system("title IPLookup v1.0")
-Banner =  """
-██╗██████╗ ██╗      ██████╗  ██████╗ ██╗  ██╗██╗   ██╗██████╗ 
-██║██╔══██╗██║     ██╔═══██╗██╔═══██╗██║ ██╔╝██║   ██║██╔══██╗
-██║██████╔╝██║     ██║   ██║██║   ██║█████╔╝ ██║   ██║██████╔╝
-██║██╔═══╝ ██║     ██║   ██║██║   ██║██╔═██╗ ██║   ██║██╔═══╝ 
-██║██║     ███████╗╚██████╔╝╚██████╔╝██║  ██╗╚██████╔╝██║     
-╚═╝╚═╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝     
-                                                            
-"""
-Menu = f"""{T.COLOR_RED} [1] {T.COLOR_RESET} Ip lookup {T.COLOR_RED} [2] {T.COLOR_RESET} Url lookup
-{T.COLOR_RED} [3] {T.COLOR_RESET} More Options \n 
-{T.COLOR_LIGHTGRAY}[4]{T.COLOR_RESET} Exit \n"""
-print(Banner)
-print(Menu)
+
+ 
+                [99] Exit    [01] More Options
+{T.COLOR_RESET}"""
+print(f"""
+{Banner}
+{Menu}
+""")
 
 
 def IpLookup(ip):
     if not ip:
-        print(f"{T.LOG_ERROR} Invaild Ip (argument)")
+        print(f"{T.LOG_ERROR} Invalid Ip (argument)")
     else:
         try:
             Response = rq.get(f'https://ipinfo.io/{ip}/json', timeout=10)
@@ -76,7 +94,7 @@ def UrlLookup(url):
         parased_url = urlparse(url)
         domain = parased_url.hostname
         if not domain:
-            print(f"{T.LOG_ERROR} Could not parse a vaild Domain From the url")
+            print(f"{T.LOG_ERROR} Could not parse a valid Domain From the url")
             return
         print(f"{T.LOG_SUCCESS} Resolving Domain: {domain}")
 
@@ -98,20 +116,20 @@ def More_Options():
         elif choice =="3":
             return
         else:
-            print(f"{T.LOG_ERROR} Invaild Input")
+            print(f"{T.LOG_ERROR} Invalid Input")
 
 while True:
     try:
         cmd = input("> ")
     except KeyboardInterrupt:
-        print(f"{T.LOG_WARN} Closing Program.") 
+        print(f"\n {T.LOG_WARN} Closing Program.") 
         time.sleep(0.5)
         sys.exit()
     if cmd == "1":
         try:
             Target = input("Enter ip > ")
         except KeyboardInterrupt:
-            print(f"{T.LOG_WARN} Closing Program.")
+            print(f"\n {T.LOG_WARN} Closing Program.")
             time.sleep(0.5)
             sys.exit()
         IpLookup(Target)
@@ -119,7 +137,7 @@ while True:
         try:
             Target = input("Enter Url > ")
         except KeyboardInterrupt:
-            print(f"{T.LOG_WARN} Closing Program.")
+            print(f"\n {T.LOG_WARN} Closing Program.")
             time.sleep(0.5)
             sys.exit()
         if not Target.startswith(('http://', 'https://')):
@@ -128,9 +146,9 @@ while True:
             UrlLookup(Compressed_url)
         else:
             UrlLookup(Target)
-    elif cmd == "3":
+    elif cmd == "01":
         More_Options()
-    elif cmd == "4":
+    elif cmd == "99":
         print(f"{T.LOG_INFO} Goodboy Friend.")
         time.sleep(1)
         sys.exit()
