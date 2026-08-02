@@ -481,5 +481,3 @@ def Main():
         print("[-] os not supported.")
         pass
 
-
-Main()
