@@ -196,7 +196,7 @@ def More_Options():
         if choice == "1":
             webbrowser.open('https://binaryabyssstudios.github.io/')
         elif choice =="2":
-            webbrowser.open('https://github.com/BinaryAbyssStudios/iplookup')
+            webbrowser.open('https://github.com/BinaryAbyssStudios/NetVitals')
         elif choice =="3":
             return
         else:
