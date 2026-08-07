@@ -27,17 +27,10 @@ Install Project Zip file and run it using Python interpeter same python3 Program
 
 **Linux**
 
-- Step 1
-  Install Project Zip File using the WEB (here) or by typing in the terminal:
+- Method 1
+  Install Project Zip File using the WEB (here) or by typing in the terminal to run it directly after installation:
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
-```
-then change to the project directory: 
-``` bash
   cd NetVitals/src
-```
-
-and last run the program.py:
-``` bash
   python3 Program.py
 ```
