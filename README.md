@@ -5,11 +5,13 @@
 - **in this Tool you can Find Everyone Location Using his IP address (internet protocol) and every url information in the built in url lookup.**
 
 - **you can find Forgotten Websites with Subdomain Enumerator Tool, and there is a bulit in Default Wordlist.**
+- **We Currently Supported 3 Offical OS (Linux, Macos, Windows).**
 
+# Update 1.3v
 
-# Support 1.2v
-
-We Currently Supported 3 Offical OS (Linux, Macos, Windows). 
+- Password Genarator Script.
+- syntax fixing
+- bugs fixing
 
 # Installations
 
