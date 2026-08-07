@@ -15,7 +15,7 @@ try:
     import Themes as T
     import Systems.Tools.passwordGenarator as PW
 except FileNotFoundError:
-    print("[!] Could not found Some Essensials Files File.")
+    print("[!] Could not found Some Essensials Files.")
     print("Please Import/Put the Theme file same directory as the program.")
     
 
