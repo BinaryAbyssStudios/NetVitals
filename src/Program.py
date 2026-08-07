@@ -11,24 +11,21 @@ import platform
 os_name = platform.system()
 #Themes Module for coloers and customization
 try:
+    import Systems.Tools.bruteforcer as Bruteforcer
     import Themes as T
+    import Systems.Tools.passwordGenarator as PW
 except FileNotFoundError:
-    print("[!] Could not found the Themes File.")
+    print("[!] Could not found Some Essensials Files File.")
     print("Please Import/Put the Theme file same directory as the program.")
     
-try:
-    import Systems.Tools.bruteforcer as Bruteforcer
-except FileNotFoundError:
-    print("[!] Could not found the Themes File.")
-    print("Please Import/Put the Theme file same directory as the program.")
 
 
 #--- NetVitals Program version 1.0---#
 #- Open Source on Github.
 if os_name == "Windows":
-    os.system("title NetVitals v1.0")
-elif os_name == "Linux" or os_name == "Darwin":
-    os.system("""printf '\033]2;NetVitals v1.0\a'""")
+    os.system("title NetVitals v1.3")
+elif os_name in ['Linux', 'Darwin']:
+    os.system("""printf '\033]2;NetVitals v1.3\a'""")
 else:
     pass
 
@@ -61,7 +58,7 @@ Menu = f"""
                 |           NetVitals              |
                 ╰──────────────────────────────────╯
     ╭────────────╯                  
-    [1] Ip Lookup              [6] Coming Soon.
+    [1] Ip Lookup              [6] Password Genarator
     [2] Url Lookup             [7] Coming Soon.
     [3] Sniffer                [8] Coming Soon.
     [4] Subdomain Enumerator   [9] Coming Soon.
@@ -202,73 +199,69 @@ def More_Options():
         else:
             print(f"{T.LOG_ERROR} Invalid Input")
 
-while True:
-    try:
-        cmd = input("~$ ")
-    except KeyboardInterrupt:
-        print(f"\n {T.LOG_INFO} Closing Program.") 
-        time.sleep(0.5)
-        sys.exit()
-#Tools Commands.
-    if cmd == "1":
+def Main():
+    while True:
         try:
-            Target = input("Enter ip > ")
-        except KeyboardInterrupt:
-            print(f"\n {T.LOG_WARN} Closing Program.")
-            time.sleep(0.5)
-            sys.exit()
-        IpLookup(Target)
-    elif cmd == "2":
-        try:
-            Target = input("Enter Url > ")
-        except KeyboardInterrupt:
-            print(f"\n {T.LOG_WARN} Closing Program.")
-            time.sleep(0.5)
-            sys.exit()
-        if not Target.startswith(('http://', 'https://')):
-            Compressed_url = 'http://' + Target
-            print(f"{T.LOG_INFO} Compressed Url: {Compressed_url}")
-            UrlLookup(Compressed_url)
-        else:
-            UrlLookup(Target)
-    elif cmd == "3":
-        sniffer()
-    elif cmd == "4":
-        Target = input("Enter Target Domain> ").strip()
-        WorldList_path = input("Enter Worldlist Full Path (leave it for default)").strip()
-        if not WorldList_path:
-            print("[*] Using default built-in wordlist...")
-            check_subdomains(Target, Default_wordlist)
-        elif os.path.exists(WorldList_path):
-            try:
-                with open(WorldList_path, "r", encoding="utf-8") as file:
-                    wordlist = [line.strip() for line in file if line.strip()]
+            cmd = input("~$ ")
+        #Tools Commands.
+            if cmd == "1":
+                Target = input("Enter ip > ")
+                IpLookup(Target)
+            elif cmd == "2":
+                Target = input("Enter Url > ")
+                if not Target.startswith(('http://', 'https://')):
+                    Compressed_url = 'http://' + Target
+                    print(f"{T.LOG_INFO} Compressed Url: {Compressed_url}")
+                    UrlLookup(Compressed_url)
+                else:
+                    UrlLookup(Target)
+            elif cmd == "3":
+                sniffer()
+            elif cmd == "4":
+                Target = input("Enter Target Domain> ").strip()
+                WorldList_path = input("Enter Worldlist Full Path (leave it for default)").strip()
+                if not WorldList_path:
+                    print("[*] Using default built-in wordlist...")
+                    check_subdomains(Target, Default_wordlist)
+                elif os.path.exists(WorldList_path):
+                    try:
+                        with open(WorldList_path, "r", encoding="utf-8") as file:
+                            wordlist = [line.strip() for line in file if line.strip()]
 
-                print(f"[+] Successfully loaded {len(wordlist)} subdomains.")
-                check_subdomains(Target, wordlist)
-            except Exception as e:
-                print(f"[-] Error reading file: {e}")
-        else:
-            print(f"[-] Error: The file path '{WorldList_path}' does not exist.")
-    elif cmd == "5":
-        try:
-            Bruteforcer.Main()
+                        print(f"[+] Successfully loaded {len(wordlist)} subdomains.")
+                        check_subdomains(Target, wordlist)
+                    except Exception as e:
+                        print(f"[-] Error reading file: {e}")
+                else:
+                    print(f"[-] Error: The file path '{WorldList_path}' does not exist.")
+            elif cmd == "5":
+                try:
+                    Bruteforcer.Main()
+                except Exception as e:
+                    print(f"{T.LOG_ERROR} A Error Has Accured.: {e}")
+            elif cmd == "6":
+                PW.Main()
+                
+        # Other nessesary Commands
+            elif cmd == "02" or cmd == "clear":
+                Clear_Console()
+            elif cmd == "01":
+                More_Options()
+            elif cmd  in ['menu', 'Menu', 'MENU']:
+                print(f"""
+        {Banner}
+        {Menu}
+        """)
+            elif cmd == "99":
+                print(f"{T.LOG_INFO} Goodbye Friend.")
+                time.sleep(1)
+                sys.exit()
+            else:
+                print(f"{T.LOG_ERROR} Invaild Input")
+        except KeyboardInterrupt:
+            exit(f"\n {T.LOG_INFO} CTRL C , KeyboardInterrupt , Closing Program.")
         except Exception as e:
-            print(f"{T.LOG_ERROR} A Error Has Accured.: {e}")
+            print(f"\n {T.LOG_ERROR} Critical Error has Occured : {e}")
 
-# Other nessesary Commands
-    elif cmd == "02" or cmd == "clear":
-        Clear_Console()
-    elif cmd == "01":
-        More_Options()
-    elif cmd == "menu":
-        print(f"""
-{Banner}
-{Menu}
-""")
-    elif cmd == "99":
-        print(f"{T.LOG_INFO} Goodbye Friend.")
-        time.sleep(1)
-        sys.exit()
-    else:
-        print(f"{T.LOG_ERROR} Invaild Input")
+if __name__ == "__main__":
+    Main()
