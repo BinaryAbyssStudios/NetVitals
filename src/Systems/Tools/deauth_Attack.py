@@ -16,8 +16,7 @@ if os_name == 'Linux':
         sys.exit()
     print("[+] Found Aircrack-ng Package")
 else:
-    print("[!] This Program only avaliable in GNU/Linux OS (operating system).")
-    print(f"[-] Program not currently avaliable on {os_name}")
+    pass
 
 active_wireless_networks = []
 
