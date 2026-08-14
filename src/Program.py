@@ -294,7 +294,10 @@ def EntryBoot():
                 print(f"{T.LOG_INFO} Running Script.")
                 PW.Main()
             elif cmd == "8":
-                da_attack.Main()
+                if os_name == 'Linux':
+                    da_attack.Main()
+                else:
+                    print(f"{T.LOG_WARN} this script only supports GNU/Linux os (operating System)")
         # Other nessesary Commands
             elif cmd == "02" or cmd == "clear":
                 Clear_Console()
