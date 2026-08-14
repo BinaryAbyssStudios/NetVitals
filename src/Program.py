@@ -315,7 +315,7 @@ def EntryBoot():
             else:
                 print(f"{T.LOG_ERROR} Invaild Input")
         except KeyboardInterrupt:
-            exit(f"\n{T.LOG_INFO} CTRL C , KeyboardInterrupt , Closing Program.")
+            sys.exit(f"\n{T.LOG_INFO} CTRL C , KeyboardInterrupt , Closing Program.")
         except ValueError as e:
             print(f"{T.LOG_ERROR} Value Error: {e}")
         except Exception as e:
