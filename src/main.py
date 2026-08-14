@@ -38,7 +38,7 @@ def main():
     try:
         Program.EntryBoot()
     except (ModuleNotFoundError, ImportError, FileNotFoundError) as ex:
-        raise ModuleNotFoundError(f"[ IMPORT ERROR ] {MNFE}")
+        raise ModuleNotFoundError(f"[ IMPORT ERROR ] {ex}")
     except Exception as e:
         raise Exception(f"[ UNEXPECTED ERROR ] {e}")
 
