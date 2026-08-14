@@ -1,5 +1,5 @@
-src/dist/
-src/build/
-src/__pycache__/
-src/Systems/Tools/__pycache__/  
-.venv
+build/
+dist/
+.venv/
+src/Systems/Tools/__pycache__/ 
+src/__pycache__/ 
