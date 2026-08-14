@@ -25,7 +25,7 @@
   Install the executable (exe) file and run it.
 
 - Method 2
-  Install the project using interpeter, run Program.py by using in the Terminal : python3 main.py    [enure you are in the right directory src folder]
+  Install the project using interpeter, run main.py by using in the Terminal : python3 main.py    [enure you are in the right directory src folder]
 
 
 **Linux** *(All Distros)* & **MacOS**
