@@ -1,0 +1,4 @@
+requests
+pathlib
+pywifi
+python-whois
