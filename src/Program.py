@@ -77,7 +77,7 @@ def Menu():
     [4] Sniffer                [9] Coming Soon.
     [5] Subdomain Enumerator   [10] Coming Soon.
 
-                {T.COLOR_BLACK}by: BinaryAbyss Studios {T.COLOR_BLUE} 
+                {T.COLOR_LIGHTGRAY}by: BinaryAbyss Studios {T.COLOR_BLUE} 
         [99] Exit    [01] More Options   [02] clear {T.COLOR_RESET}"""
 
 
@@ -309,8 +309,7 @@ def EntryBoot():
         {Menu()}
         """)
             elif cmd == "99":
-                print(f"{T.LOG_INFO} Goodbye Friend.")
-                time.sleep(1)
+                print(f"{T.LOG_INFO} Goodbye.")
                 sys.exit()
             else:
                 print(f"{T.LOG_ERROR} Invaild Input")
