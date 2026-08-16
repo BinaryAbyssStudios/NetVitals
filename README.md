@@ -31,7 +31,7 @@
 **Linux** *(All Distros)* & **MacOS**
 
 - Method 1
-  Install Project Zip File using the WEB (here) or by typing in the terminal to run it directly after installation:
+  Install Project Zip File using the terminal git clone:
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
