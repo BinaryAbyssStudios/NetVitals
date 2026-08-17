@@ -249,7 +249,7 @@ def EntryBoot():
                 Target = input("Enter ip > ").strip()
                 IpLookup(Target)
             elif cmd == "2":
-                Target = input("Enter Url > ")
+                Target = input("Enter Url > ").strip()
                 if not Target.startswith(('http://', 'https://')):
                     Compressed_url = 'http://' + Target
                     print(f"{T.LOG_INFO} Compressed Url: {Compressed_url}")
