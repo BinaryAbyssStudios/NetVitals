@@ -246,7 +246,7 @@ def EntryBoot():
             cmd = input("~$ ").strip()
         #Tools Commands.
             if cmd == "1":
-                Target = input("Enter ip > ")
+                Target = input("Enter ip > ").strip()
                 IpLookup(Target)
             elif cmd == "2":
                 Target = input("Enter Url > ")
