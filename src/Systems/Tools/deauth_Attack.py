@@ -197,5 +197,6 @@ def Main():
         print("[!] Stop monitoring mode")
         # We run a subprocess.run command where we stop monitoring mode on the network adapter.
         subprocess.run(["airmon-ng", "stop", hacknic + "mon"])
+        print("[!] to regain wifi please restart NetworkManager service by try using 'systemctl --user restart NetworkManager'")
         print("Thank you! Exiting now")
 
