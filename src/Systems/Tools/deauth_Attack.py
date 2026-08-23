@@ -53,7 +53,7 @@ def Home_Menu():
 
 ****************************************************************      
 * by: BinaryAbyss Studios                                      *
-*  https://binaryabyssstudios.github.io/                       *  
+*   https://binaryabyssstudios.github.io/                      *  
 ****************************************************************                                                         ░    
 """
 
