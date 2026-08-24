@@ -60,7 +60,7 @@ def Home_Menu():
 def Main():
     if os.geteuid() != 0:
         print("[-] You need to have root privileges to run this script.\n[-] Please try again, this time using 'sudo'.\n Exiting.")
-        sys.exit()
+        return
 
     print(Home_Menu())
 
