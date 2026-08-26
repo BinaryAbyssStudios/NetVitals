@@ -24,20 +24,53 @@
 - Method 1
   Install the executable (exe) file and run it.
 
-- Method 2
-  Install the project using interpeter, run main.py by using in the Terminal : python3 main.py    [enure you are in the right directory src folder]
+-  Method 2
+  **run it directly from source (Manually)**
+    
+  ***powershell method***
+``` bash
+  git clone https://github.com/BinaryAbyssStudios/NetVitals.git
+  cd NetVitals/
+  py -m venv .venv  # Virtual Enviroment
+  ./.venv/Scripts/Activate.ps1 # Activate Virtual Enviroment
+  pip install -r requirements.txt # Install Program Requirements
+  python3 src/main.py # EntryPoint
+``` 
 
+   ***Command prompt method***
+``` bash
+  git clone https://github.com/BinaryAbyssStudios/NetVitals.git
+  cd NetVitals/
+  py -m venv .venv  # Virtual Enviroment
+  .venv\Scripts\activate # Activate Virtual Enviroment Diffrent from powershell
+  pip install -r requirements.txt # Install Program Requirements
+  python3 src/main.py # EntryPoint
+``` 
+
+if your running it again after installation and run ( same directory (Same folder) )
+``` bash
+  cd NetVitals/
+  .venv\Scripts\activate # if its powershell run ./.venv/Scripts/Activate.ps1
+  python3 src/main.py # EntryPoint
+``` 
 
 **Linux** *(All Distros)* & **MacOS**
 
 - Method 1
-  Install Project Zip File using the terminal git clone:
+  Install Project Zip File using the terminal git clone **(Directly from source)**:
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
   python3 -m venv .venv # Virtual Enviroment
   source .venv/bin/activate # Activate Virtual Enviroment
   pip install -r requirements.txt # Install Program Requirements
+  python3 src/main.py # EntryPoint
+```
+
+if you want to run after installation again (same directory): 
+``` bash
+  cd NetVitals/
+  source .venv/bin/activate # Activate Virtual Enviroment # if fish terminal add .fish at the end
   python3 src/main.py # EntryPoint
 ```
 
