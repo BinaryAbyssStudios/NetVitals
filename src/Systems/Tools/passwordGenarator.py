@@ -239,7 +239,7 @@ def Handle_Output_File():
             print(Menu())
             return
 
-def Main():
+def main():
     print(Menu())
     while True:
         try: 
@@ -268,3 +268,6 @@ def Main():
             return
         except Exception as e:
             print(f"\n [-] a Critical Error has Occured: {e}")
+
+if __name__ == "__main__":
+    main()

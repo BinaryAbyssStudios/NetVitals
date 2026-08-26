@@ -12,7 +12,7 @@ if os_name == 'Windows':
         import pywifi
         from pywifi import const
     except ImportError:
-        print("[-] pywifi Package not found please install the package using (pip isntall pywifi)")
+        print("[-] pywifi Package not found please install the package using (pip install pywifi)")
 elif os_name in ['Linux', 'darwin']:
     os.system('clear')
     if os_name == 'Linux':
@@ -472,7 +472,7 @@ elif os_name == 'Linux':
 
 
 
-def Main():
+def main():
     if os_name == 'Windows':
         Windows_Boot()
     elif os_name == 'Linux':
@@ -484,3 +484,5 @@ def Main():
         print("[-] os not supported.")
         pass
 
+if __name__ == "__main__":
+    main()

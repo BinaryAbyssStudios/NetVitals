@@ -2,3 +2,4 @@ requests
 pathlib
 pywifi
 python-whois
+scapy

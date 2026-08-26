@@ -1,4 +1,4 @@
-# Theme styling
+#─────Theme styling───────────────
 LOG_INFO = "\033[36m[ INFO ]\033[0m"       # Cyan [ INFO ]
 LOG_SUCCESS = "\033[32m[ OK ]\033[0m" # Green [ OK ]
 LOG_WARN = "\033[33m[ WARN ]\033[0m"       # Yellow [ WARN ]

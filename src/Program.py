@@ -1,4 +1,4 @@
-#time Module
+#── Time Module ────────────────
 import time
 # Dependenses
 import socket  
@@ -15,29 +15,38 @@ try:
     import Systems.Tools.bruteforcer as Bruteforcer
     import Systems.Tools.passwordGenarator as PW
     import Systems.Tools.deauth_Attack as da_attack
+    import Systems.Tools.Nmap_tool as NTool
+    import Systems.Tools.Arp_spoof as ASP
 except ModuleNotFoundError: 
     print("[!] Could not found Some Essensials Files File.")
     print("Please Import/Put the Theme file same directory as the program.")
 
-# Saftey Check.
+# ── Free up Ram usage and optimization ────────────────────
+del Bruteforcer, PW, da_attack, NTool, ASP
+del sys.modules["Systems.Tools.bruteforcer"]
+del sys.modules["Systems.Tools.passwordGenarator"]
+del sys.modules["Systems.Tools.deauth_Attack"]
+del sys.modules["Systems.Tools.Nmap_tool"]
+del sys.modules["Systems.Tools.Arp_spoof"]
+
+# ── Saftey Check ────────────────
 try:
     import requests as rq
     import whois
-    import tracemalloc
     if os_name == 'Windows':
         import pywifi
         del pywifi
     else:
-        pass
-except ModuleNotFoundError as e:
+        pass    
+except (ModuleNotFoundError, ImportError) as e:
     raise Exception(f"{T.LOG_ERROR} Could not found essensials modules, Please Install it from requirements.txt: {e}")
 
-#--- NetVitals Program version 1.4---#
+# ── NetVitals Program version 1.5 ───────────────────────────────────
 #- Open Source on Github.
 if os_name == "Windows":
-    os.system("title NetVitals v1.4")
+    os.system("title NetVitals v1.5")
 elif os_name == "Linux" or os_name == "Darwin":
-    os.system("""printf '\033]2;NetVitals v1.4\a'""")
+    os.system("""printf '\033]2;NetVitals v1.5\a'""")
 else:
     pass
 
@@ -67,17 +76,17 @@ Banner =  r"""
 ╚═╝  ╚═══╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝"""
 def Menu():
     return f"""                         
-  ╭─────────────────╮         ╭─────────────────╮
-  |Network Discovery| --</>-- | Network Attacks |
-  ╰─────────────────╯         ╰─────────────────╯
+  ╭─────────────────╮         ╭────────────────────╮
+  |Network Discovery| --</>-- | Network Essensials |
+  ╰─────────────────╯         ╰────────────────────╯
                 
     [1] Ip Lookup              [6] Network BruteForcer.
     [2] Url Lookup             [7] Password Genarator.
     [3] Whois Lookup           [8] Deauth Attack.
-    [4] Sniffer                [9] Coming Soon.
-    [5] Subdomain Enumerator   [10] Coming Soon.
+    [4] Sniffer                [9] Nmap Simplified.
+    [5] Subdomain Enumerator   [10] Arp Spoof.
 
-                {T.COLOR_LIGHTGRAY}by: BinaryAbyss Studios {T.COLOR_BLUE} 
+             {T.COLOR_LIGHTGRAY}by: BinaryAbyss Studios, LLC {T.COLOR_BLUE} 
         [99] Exit    [01] More Options   [02] clear {T.COLOR_RESET}"""
 
 
@@ -122,7 +131,7 @@ location = {location}
 org = {org}
 postal = {postal}
 timezone = {timezone}
-"""
+""" 
             print(Compressed_data)
         except Exception as ex:
             print(f"{T.LOG_ERROR} {ex}")
@@ -243,7 +252,7 @@ def EntryBoot():
 """)
     while True:
         try:
-            cmd = input("~$ ").strip()
+            cmd = input("~$ ").strip().lower()
         #Tools Commands.
             if cmd == "1":
                 Target = input("Enter ip > ").strip()
@@ -289,13 +298,36 @@ def EntryBoot():
 
             elif cmd == "6":
                 print(f"{T.LOG_INFO} Running Script.")
-                Bruteforcer.Main()
+                import Systems.Tools.bruteforcer as Bruteforcer
+                Bruteforcer.main()
+                del Bruteforcer
+                del sys.modules["Systems.Tools.bruteforcer"]
             elif cmd == "7":
                 print(f"{T.LOG_INFO} Running Script.")
-                PW.Main()
+                import Systems.Tools.passwordGenarator as PW
+                PW.main()
+                del PW
+                del sys.modules["Systems.Tools.passwordGenarator"]
             elif cmd == "8":
                 if os_name == 'Linux':
-                    da_attack.Main()
+                    import Systems.Tools.deauth_Attack as da_attack
+                    da_attack.main()
+                    del da_attack
+                    del sys.modules["Systems.Tools.deauth_Attack"]
+                else:
+                    print(f"{T.LOG_WARN} this script only supports GNU/Linux os (operating System)")
+            elif cmd == "9":
+                print(f"{T.LOG_INFO} Running Script.")
+                import Systems.Tools.Nmap_tool as NTool
+                NTool.main()
+                del NTool
+                del sys.modules["Systems.Tools.Nmap_tool"]
+            elif cmd == "10":
+                if os_name == 'Linux':
+                    import Systems.Tools.Arp_spoof as ASP
+                    ASP.main()
+                    del ASP
+                    del sys.modules["Systems.Tools.Arp_spoof"]
                 else:
                     print(f"{T.LOG_WARN} this script only supports GNU/Linux os (operating System)")
         # Other nessesary Commands
@@ -303,7 +335,7 @@ def EntryBoot():
                 Clear_Console()
             elif cmd == "01":
                 More_Options()
-            elif cmd  in ['menu', 'Menu', 'MENU']:
+            elif cmd  in ['menu']:
                 print(f"""
         {Banner}
         {Menu()}

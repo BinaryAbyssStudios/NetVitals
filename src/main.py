@@ -1,6 +1,6 @@
 import Program
 
-Backup_Themes = r"""# Theme styling
+Backup_Themes = r"""#─────Theme styling───────────────
 LOG_INFO = "\033[36m[ INFO ]\033[0m"       # Cyan [ INFO ]
 LOG_SUCCESS = "\033[32m[ OK ]\033[0m" # Green [ OK ]
 LOG_WARN = "\033[33m[ WARN ]\033[0m"       # Yellow [ WARN ]
@@ -19,7 +19,7 @@ COLOR_LIGHTGRAY = "\033[37m"
 COLOR_RESET = "\033[0m"
 """
 
-# Themes fallback system
+# ── Themes fallback system ────────────────
 try:
     import Themes
     print(f"{Themes.LOG_SUCCESS} Loaded Themes.")
@@ -28,7 +28,7 @@ except ModuleNotFoundError:
 
     with open("Themes.py", 'w', encoding='utf-8') as TH:
         TH.write(Backup_Themes)
-    del Backup_Themes # Clears The variable for freeing Memoryand preformance and also its now useless
+    del Backup_Themes # ── Clears The variable for freeing Memory and preformance and also its now useless ─────────────
     import Themes
     print(f"{Themes.LOG_SUCCESS} Loaded Themes (fallback recreated).")
 

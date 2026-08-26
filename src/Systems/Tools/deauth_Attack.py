@@ -57,7 +57,7 @@ def Home_Menu():
 ****************************************************************                                                         ░    
 """
 
-def Main():
+def main():
     if os.geteuid() != 0:
         print("[-] You need to have root privileges to run this script.\n[-] Please try again, this time using 'sudo'.\n Exiting.")
         return
@@ -200,3 +200,5 @@ def Main():
         print("[!] to regain wifi please restart NetworkManager service by try using 'systemctl --user restart NetworkManager'")
         print("Thank you! Exiting now")
 
+if __name__ == "__main__":
+    main()
