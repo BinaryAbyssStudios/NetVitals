@@ -31,23 +31,23 @@
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
-  python3 setup.py # do pip install -r requirements.txt for manual installation if you want.
-  python3 src/main.py # EntryPoint
+  py setup.py # do pip install -r requirements.txt for manual installation if you want.
+  py src/main.py # EntryPoint
 ``` 
 
    ***Command prompt method***
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
-  python3 setup.py # do pip install -r requirements.txt for manual installation if you want.
-  python3 src/main.py # EntryPoint
+  py setup.py # do pip install -r requirements.txt for manual installation if you want.
+  py src/main.py # EntryPoint
 ``` 
 
 if your running it again after installation and run ( same directory (Same folder) )
 ``` bash
   cd NetVitals/
   .venv\Scripts\activate # if its powershell run ./.venv/Scripts/Activate.ps1
-  python3 src/main.py # EntryPoint
+  py src/main.py # EntryPoint
 ``` 
 
 **Linux** *(All Distros)* & **MacOS**
