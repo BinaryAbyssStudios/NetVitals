@@ -31,9 +31,7 @@
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
-  py -m venv .venv  # Virtual Enviroment
-  ./.venv/Scripts/Activate.ps1 # Activate Virtual Enviroment
-  pip install -r requirements.txt # Install Program Requirements
+  python3 setup.py # do pip install -r requirements.txt for manual installation if you want.
   python3 src/main.py # EntryPoint
 ``` 
 
@@ -41,9 +39,7 @@
 ``` bash
   git clone https://github.com/BinaryAbyssStudios/NetVitals.git
   cd NetVitals/
-  py -m venv .venv  # Virtual Enviroment
-  .venv\Scripts\activate # Activate Virtual Enviroment Diffrent from powershell
-  pip install -r requirements.txt # Install Program Requirements
+  python3 setup.py # do pip install -r requirements.txt for manual installation if you want.
   python3 src/main.py # EntryPoint
 ``` 
 
@@ -59,18 +55,16 @@ if your running it again after installation and run ( same directory (Same folde
 - Method 1
   Install Project Zip File using the terminal git clone **(Directly from source)**:
 ``` bash
-  git clone https://github.com/BinaryAbyssStudios/NetVitals.git
+  git clone https://github.com/BinaryAbyssStudios/NetVitals.gits
   cd NetVitals/
-  python3 -m venv .venv # Virtual Enviroment
-  source .venv/bin/activate # Activate Virtual Enviroment
-  pip install -r requirements.txt # Install Program Requirements
+  python3 setup.py # do pip install -r requirements.txt for manual installation if you want.
   python3 src/main.py # EntryPoint
 ```
 
 if you want to run after installation again (same directory): 
 ``` bash
   cd NetVitals/
-  source .venv/bin/activate # Activate Virtual Enviroment # if fish terminal add .fish at the end
+  source .venv/bin/activate # Activate Virtual Enviroment # if fish terminal add .fish at the end (IF HAVE VIRTUAL ENVIROMENT)
   python3 src/main.py # EntryPoint
 ```
 
