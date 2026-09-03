@@ -22,11 +22,11 @@ except ModuleNotFoundError:
 
 # ── Free up Ram usage and optimization ────────────────────
 del bruteforcer, PW, da_attack, NTool, ASP
-del sys.modules["Systems.Tools.bruteforcer"]
-del sys.modules["Systems.Tools.passwordGenarator"]
-del sys.modules["Systems.Tools.deauth_Attack"]
-del sys.modules["Systems.Tools.Nmap_tool"]
-del sys.modules["Systems.Tools.Arp_spoof"]
+sys.modules.pop("Systems.Tools.bruteforcer", None)
+sys.modules.pop("Systems.Tools.passwordGenarator", None)
+sys.modules.pop("Systems.Tools.deauth_Attack", None)
+sys.modules.pop("Systems.Tools.Nmap_tool", None)
+sys.modules.pop("Systems.Tools.Arp_spoof", None)
 
 # ── Saftey Check ────────────────
 try:
