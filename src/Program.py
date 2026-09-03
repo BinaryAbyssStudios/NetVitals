@@ -1,6 +1,5 @@
-#── Time Module ────────────────
+#── Dependenses ────────────────
 import time
-# Dependenses
 import socket  
 import os
 import sys
@@ -12,17 +11,17 @@ from datetime import datetime
 os_name = platform.system()
 try: 
     import Themes as T # Themes Module for coloers and customization
-    import Systems.Tools.bruteforcer as Bruteforcer
-    import Systems.Tools.passwordGenarator as PW
-    import Systems.Tools.deauth_Attack as da_attack
-    import Systems.Tools.Nmap_tool as NTool
-    import Systems.Tools.Arp_spoof as ASP
+    from Systems.Tools import bruteforcer
+    from Systems.Tools import passwordGenarator as PW
+    from Systems.Tools import deauth_Attack as da_attack
+    from Systems.Tools import Nmap_tool as NTool
+    from Systems.Tools import Arp_spoof as ASP
 except ModuleNotFoundError: 
     print("[!] Could not found Some Essensials Files File.")
     print("Please Import/Put the Theme file same directory as the program.")
 
 # ── Free up Ram usage and optimization ────────────────────
-del Bruteforcer, PW, da_attack, NTool, ASP
+del bruteforcer, PW, da_attack, NTool, ASP
 del sys.modules["Systems.Tools.bruteforcer"]
 del sys.modules["Systems.Tools.passwordGenarator"]
 del sys.modules["Systems.Tools.deauth_Attack"]
@@ -36,10 +35,10 @@ try:
     if os_name == 'Windows':
         import pywifi
         del pywifi
-    else:
-        pass    
+        sys.modules.pop('pywifi', None)
 except (ModuleNotFoundError, ImportError) as e:
-    raise Exception(f"{T.LOG_ERROR} Could not found essensials modules, Please Install it from requirements.txt: {e}")
+    print(f"{T.LOG_ERROR} Could not found essensials modules, Please Install it from requirements.txt: {e}")
+    sys.exit(1)
 
 # ── NetVitals Program version 1.5 ───────────────────────────────────
 #- Open Source on Github.
@@ -298,36 +297,36 @@ def EntryBoot():
 
             elif cmd == "6":
                 print(f"{T.LOG_INFO} Running Script.")
-                import Systems.Tools.bruteforcer as Bruteforcer
-                Bruteforcer.main()
-                del Bruteforcer
-                del sys.modules["Systems.Tools.bruteforcer"]
+                from Systems.Tools import bruteforcer
+                bruteforcer.main()
+                del bruteforcer
+                sys.modules.pop("Systems.Tools.bruteforcer", None)
             elif cmd == "7":
                 print(f"{T.LOG_INFO} Running Script.")
-                import Systems.Tools.passwordGenarator as PW
+                from Systems.Tools import passwordGenarator as PW
                 PW.main()
                 del PW
-                del sys.modules["Systems.Tools.passwordGenarator"]
+                sys.modules.pop("Systems.Tools.passwordGenarator", None)
             elif cmd == "8":
                 if os_name == 'Linux':
-                    import Systems.Tools.deauth_Attack as da_attack
+                    from Systems.Tools import deauth_Attack as da_attack
                     da_attack.main()
                     del da_attack
-                    del sys.modules["Systems.Tools.deauth_Attack"]
+                    sys.modules.pop("Systems.Tools.deauth_Attack", None)
                 else:
                     print(f"{T.LOG_WARN} this script only supports GNU/Linux os (operating System)")
             elif cmd == "9":
                 print(f"{T.LOG_INFO} Running Script.")
-                import Systems.Tools.Nmap_tool as NTool
+                from Systems.Tools import Nmap_tool as NTool
                 NTool.main()
                 del NTool
-                del sys.modules["Systems.Tools.Nmap_tool"]
+                sys.modules.pop("Systems.Tools.Nmap_tool", None)
             elif cmd == "10":
                 if os_name == 'Linux':
-                    import Systems.Tools.Arp_spoof as ASP
+                    from Systems.Tools import Arp_spoof as ASP
                     ASP.main()
                     del ASP
-                    del sys.modules["Systems.Tools.Arp_spoof"]
+                    sys.modules.pop("Systems.Tools.Arp_spoof", None)
                 else:
                     print(f"{T.LOG_WARN} this script only supports GNU/Linux os (operating System)")
         # Other nessesary Commands
