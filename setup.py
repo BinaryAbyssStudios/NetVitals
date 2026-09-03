@@ -15,7 +15,7 @@ else:
     else:
         print("[+] creating virtual environment..")
         venv_result = subprocess.run(
-            [sys.executable, '-m', 'venv', 'venv'],
+            [sys.executable, '-m', 'venv', '.venv'],
             text=True,
             capture_output=True
         )
