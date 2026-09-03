@@ -2,6 +2,7 @@ build/
 dist/
 .venv/
 src/Systems/Tools/__pycache__/ 
+src/Systems/__pycache__/ 
 src/__pycache__/
 ico
 main.spec
