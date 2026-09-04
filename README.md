@@ -21,7 +21,7 @@
 
 > **Disclamer**
 >
-> all executeable files in the releases
+> all executeable files in the releases down is the manual installations.
 
 ---
 
