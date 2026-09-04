@@ -19,6 +19,12 @@
 
 # Installations
 
+> **Disclamer**
+>
+> all executeable files in the releases
+
+---
+
 **Windows**
 
 - Method 1
@@ -49,6 +55,8 @@ if your running it again after installation and run ( same directory (Same folde
   .venv\Scripts\activate # if its powershell run ./.venv/Scripts/Activate.ps1
   py src/main.py # EntryPoint
 ``` 
+
+---
 
 **Linux** *(All Distros)* & **MacOS**
 
