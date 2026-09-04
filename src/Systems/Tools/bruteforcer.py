@@ -11,8 +11,8 @@ if os_name == 'Windows':
     try:
         import pywifi
         from pywifi import const
-    except ImportError:
-        print("[-] pywifi Package not found please install the package using (pip install pywifi)")
+    except ImportError as e:
+        print(f"[-] pywifi Package not found please install the package using (pip install pywifi): {e}")
 elif os_name in ['Linux', 'darwin']:
     os.system('clear')
     if os_name == 'Linux':
