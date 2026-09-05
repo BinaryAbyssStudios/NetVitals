@@ -76,4 +76,10 @@ if you want to run after installation again (same directory):
   python3 src/main.py # EntryPoint
 ```
 
-**Thank you for supporting us.**
+---
+
+## Support
+
+If you find this project useful, consider sponsoring its development.
+
+[![Sponsor](https://img.shields.io/badge/❤️-Sponsor-ea4aaa)](https://github.com/sponsors/BinaryAbyssStudios
